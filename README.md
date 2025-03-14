@@ -177,8 +177,4 @@ backend/
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
 
-- Built by XNL-21bct0051
-- Inspired by modern trading systems architecture
-- Thanks to the Go community for excellent packages
