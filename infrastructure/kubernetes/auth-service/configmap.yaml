@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+  namespace: auth-service
+data:
+  DB_HOST: "cockroachdb-public"
+  DB_PORT: "26257"
+  DB_NAME: "financeapp"
+  REDIS_URL: "redis://redis-master:6379"
+  API_URL: "https://api.finance-platform.com"
+  FRONTEND_URL: "https://finance-platform.com"
+  LOG_LEVEL: "info"
+  RATE_LIMIT_WINDOW_MS: "900000"
+  RATE_LIMIT_MAX_REQUESTS: "100" 

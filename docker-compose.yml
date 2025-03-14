@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Authentication Service
+  auth-service:
+    build:
+      context: ./backend/auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=cockroachdb
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - cockroachdb
+      - redis
+    volumes:
+      - ./backend/auth-service:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - app-network
+
+  # CockroachDB
+  cockroachdb:
+    image: cockroachdb/cockroach:v21.2.4
+    command: start-single-node --insecure
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    volumes:
+      - cockroachdb-data:/cockroach/cockroach-data
+    networks:
+      - app-network
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+  # Adminer for database management
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+    depends_on:
+      - cockroachdb
+
+volumes:
+  cockroachdb-data:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge 

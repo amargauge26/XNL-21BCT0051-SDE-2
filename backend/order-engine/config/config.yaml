@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  grpc_port: 50051
+  environment: development
+  read_timeout: 10
+  write_timeout: 10
+
+database:
+  host: localhost
+  port: 26257
+  user: root
+  password: ""
+  dbname: financeapp
+  sslmode: disable
+
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+
+nats:
+  url: nats://localhost:4222
+  username: ""
+  password: ""
+
+log:
+  level: debug
+  path: logs/order-engine.log 
